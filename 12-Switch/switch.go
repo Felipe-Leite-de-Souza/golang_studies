@@ -2,6 +2,7 @@ package main
 
 import "fmt"
 
+// Switch
 // Por padrão o GO na estrutura do Switch não necessita de um Break pois o mesmo já existe internamente
 
 func diaDaSemana(numero int) string {
