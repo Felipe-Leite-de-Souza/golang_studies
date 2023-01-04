@@ -1,38 +1,50 @@
 // TESTE UNITÁRIO BÁSICO
 
-package endereco
+package endereco_test
 
-import "testing"
+import (
+	. "introducaoTestes/endereco"
+	"testing"
+)
 
 type cenarioDeTeste struct {
 	enderecoInserido string
 	retornoEsperado  string
 }
 
+// go test --cover
+// go test --coverprofile cobertura.txt
+// go test -v
+// go tool cover --func=cobertura.txt
 func TestTipoDeEndereco(t *testing.T) {
+	t.Parallel()
 
 	cenariosDeTeste := []cenarioDeTeste{
 		{"Rua ABC", "Rua"},
 		{"Avenida Paulista", "Avenida"},
 		{"Rodovia dos Imigrantes", "Rodovia"},
-		{"Estrada ABC", "Estrada"},
-		{"Praça das Rpsas", "Tipo inválido"},
-		{"RUA Teste", "Rua"},
-		{"AVENIDA Teste", "Avenida"},
-		{"", "Tipo inválido"},
+		{"Praça das Rosas", "Tipo Inválido"},
+		{"Estrada Qualquer", "Estrada"},
+		{"RUA DOS BOBOS", "Rua"},
+		{"AVENIDA REBOUÇAS", "Avenida"},
+		{"", "Tipo Inválido"},
 	}
 
-	//enderecoParaTeste := "Rua ABC"
-	//tipoDeEnderecoEsperado := "Rua"
-	//tipoDeEnderecoRecebido := TipoDeEndereco(enderecoParaTeste)
-	//if tipoDeEnderecoRecebido != tipoDeEnderecoEsperado {
-	//	t.Errorf("O tipo é diferente do esperado! Esperava %s e recebeu %s", tipoDeEnderecoEsperado, tipoDeEnderecoRecebido)
-	//}
-
 	for _, cenario := range cenariosDeTeste {
-		tipoDeEnderecoRecebido := TipoDeEndereco(cenario.enderecoInserido)
-		if tipoDeEnderecoRecebido != cenario.retornoEsperado {
-			t.Errorf("O tipo recebido %s é diferente do esperado %s", tipoDeEnderecoRecebido, cenario.retornoEsperado)
+		retornoRecebido := TestTipoDeEndereco(cenario.enderecoInserido)
+		if retornoRecebido != cenario.retornoEsperado {
+			t.Errorf("O tipo recebido %s é diferente do esperado %s",
+				retornoRecebido,
+				cenario.retornoEsperado,
+			)
 		}
+	}
+}
+
+func TestQualquer(t *testing.T) {
+	t.Parallel()
+
+	if 1 > 2 {
+		t.Errorf("Teste quebrou!")
 	}
 }
